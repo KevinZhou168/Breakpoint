@@ -31,19 +31,6 @@ For **replay and HTTP inference only**, install `requirements.txt` instead. Sele
 
 Inference model IDs use **project/version**, for example `vehicle-detection-wvcx6/1`, rather than `workspace/project/version`. The app automatically removes a workspace prefix and shows the ID it will use. Private-model keys are passed explicitly to both local and HTTP inference. The app rereads `.env` on rerun, including edited keys; file values override existing environment values.
 
-## Demo workflow
-
-1. Open the **Failure atlas**. Explain the retention curve and the three first-failure cards. Cards show the actual blur spread in pixels, the percentage of original pixel values remaining for darkness, or the noise spread. Each explains the passing and failing severity endpoints.
-2. Scrub **Gaussian blur** from severity 0 to 0.4. The clean reference has 35 detections; at 0.4 only 16 remain matched. Green boxes survive; coral boxes mark lost reference positions.
-3. Try blur 0.6: zero clean detections remain matched. Compare darkness 0.5 and 0.6. Switch to noise to show a perturbation that **does not** cross the chosen criterion.
-4. Use **Object traces** to inspect the detection-status matrix: green checkmarks mean retained and coral crosses mean lost for blur/darkness. Noise cells show how many trials retained the object (0/3 through 3/3 by default); the unchanged control is labeled separately. Hover over a cell to see the actual adjustment. Noise offers three seeded realizations per nonzero severity.
-5. Adjust confidence, matching IoU, or the failure criterion. This reanalyzes stored raw predictions without inference calls. The confidence control also changes the baseline reference set.
-6. Run a fresh local sweep, then download the ZIP from **Results & export**. It includes every raw response, the exact experimental input, metrics CSV, report, and the selected annotated comparison.
-
-See [PRESENTATION.md](PRESENTATION.md) for a ten-minute interview walkthrough.
-
-The **Results & export** page shows seven plain-language columns with hover explanations. The CSV matches that table, averaging noise trials into one row per tested strength; a downloadable column guide explains every field. Full per-trial predictions and technical settings remain in the experiment JSON. Methodology and limitations are available in expandable sections.
-
 ## Measured result
 
 Included run `8bb6c4e29308cee3`, captured October 22, 2026, uses RF-DETR Small (`rfdetr-small`, resolved locally to `coco/39`) on the official people-walking example resized to **960 × 540**. Evaluation confidence is **0.25**, matching IoU **0.50**, and failure means **strictly less than 50% retention**.
