@@ -1,0 +1,11 @@
+.venv*/
+.cache/
+.env
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store
+artifacts/runs/
+PRESENTATION.md
+VALIDATION.md
